@@ -1,3 +1,13 @@
 body {
     background: #c09b9b;
 }
+
+/* nav-bar */
+.navbar {
+    height : 5 rem;
+
+}
+.fa-compass {
+    color : #fe424d;
+    font-size:  2rem;
+}
