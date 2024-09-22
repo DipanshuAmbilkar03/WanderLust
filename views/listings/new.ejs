@@ -1,25 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Route</title>
-</head>
+<% layout("./layouts/boilerplate") %>
 <body>
     <form method="POST" action="/listings">
         <input name="listing[title]" placeholder="enter title" type="text">
-        <hr>
+        <br>
         <textarea name="listing[description]" placeholder="enter description" type="text"></textarea>
-        <hr>
+        <br>
         <input name="listing[image.URL]" placeholder="enter image URL/Link" type="text">
-        <hr>
+        <br>
         <input name="listing[price]" placeholder="enter price" type="number">
-        <hr>
+        <br>
         <input name="listing[location]" placeholder="enter location" type="text">
-        <hr>
+        <br>
         <input name="listing[country]" placeholder="enter country" type="text">
-        <hr>
-        <button>submit</button>
+        <br>
+        <button>Add</button>
+
     </form>
 </body>
-</html>
