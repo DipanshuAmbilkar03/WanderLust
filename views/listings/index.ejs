@@ -7,6 +7,8 @@
     <ul>
         <% for(let listing of allListing) { %>
         <li>
+            <a href="/listings/<%=listing._id%>"><%= listing.title %></a><br>
+            <a href="/listings/<%=listing._id%>"><%= listing.title %></a><br>
             <a href="/listings/<%=listing._id%>"><%= listing.title %></a>
         </li>
         <% } %>
