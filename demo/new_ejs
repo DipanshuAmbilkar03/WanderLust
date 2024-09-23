@@ -1,0 +1,43 @@
+<!-- title -->
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"></span>
+            <input name="listing[title]" type="text" class="form-control" placeholder="enter title">
+          </div>
+
+          <!-- textarea -->
+          <div class="input-group">
+            <span class="input-group-text">Description</span>
+            <textarea name="listing[description]" placeholder="enter description" type="text" class="form-control" ></textarea>
+          </div>
+          
+          <!-- image -->
+          <div class="mb-3">
+            <label for="basic-url" class="form-label">Enter Image URL/Link</label>
+            <div class="input-group">
+              <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
+              <input name="listing[price]" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+          </div>
+          
+          <!-- price -->
+          <div class="input-group mb-3">
+            <!-- <span class="input-group-text">Rs.</span> -->
+            <input name="listing[price]" placeholder="enter price" type="number" class="form-control"">
+            <!-- <span class="input-group-text">.00</span> -->
+          </div>
+          
+          <!-- location -->
+          <div class="input-group mb-3">
+            <input name="listing[location]" placeholder="enter location" type="text" class="form-control" aria-label="Username">
+            <span class="input-group-text">@</span>
+            <!-- <input name="listing[location]" placeholder="enter location" type="text" class="form-control"> -->
+          </div>
+
+          <!-- country -->
+          <div class="input-group mb-3">
+            <input class="form-control" name="listing[country]" placeholder="enter country" type="text">
+            <span class="input-group-text">@</span>
+            <!-- <input name="listing[country]" placeholder="enter country" type="text" class="form-control"> -->
+          </div>
+
+    </form>
