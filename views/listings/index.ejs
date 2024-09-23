@@ -4,12 +4,20 @@
     <!-- <form method="GET" action="listings/new" >
         <button>Create new Listings</button>
     </form> -->
+
+    <% for(let listing of allListing) { %>
+    <div class="card" style="width: 18rem;">
+        <img src="<%= listing.image %>" class="card-img-top" alt="listings">
+        <div class="card-body">
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+    <% } %>
+
     <ul>
         <% for(let listing of allListing) { %>
         <li>
-            <a href="/listings/<%=listing._id%>"><%= listing.title %></a><br>
-            <a href="/listings/<%=listing._id%>"><%= listing.title %></a><br>
-            <a href="/listings/<%=listing._id%>"><%= listing.title %></a>
+            <a href="/listings/<%=listing._id%>"><%= listing.title %></a><br>    
         </li>
         <% } %>
     </ul>

@@ -26,8 +26,14 @@ body {
     text-decoration : underline;
 }
 
-.f-info-socials, .f-info-links{
+.f-info-socials, 
+.f-info-links,
+.f-info-brand
+{
     width : 100%;
+    display : flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .f-info-socials i {
