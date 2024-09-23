@@ -5,9 +5,13 @@ body {
 /* nav-bar */
 .navbar {
     height : 5 rem;
-
+    background: white;
 }
 .fa-compass {
     color : #fe424d;
     font-size:  2rem;
+}
+
+.nav-link {
+    color : #222222 !important;
 }
