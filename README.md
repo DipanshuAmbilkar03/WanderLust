@@ -31,7 +31,7 @@
   <li><strong>Express.js:</strong> Web framework for Node.js</li>
   <li><strong>MongoDB & Mongoose:</strong> NoSQL database and schema modeling</li>
   <li><strong>EJS:</strong> Templating engine for rendering dynamic HTML</li>
-  <li><strong>RESTful API:</strong> Implements RESTful API endpoints for CRUD operations (Create, Read, Update, Delete).</li>
+  <li><strong>RESTful API:</strong> Implements RESTful API endpoints for CRUD operations.</li>
   <li><strong>JavaScript:</strong> Client-side and server-side scripting is done using JavaScript for dynamic behavior.</li>
   <li><strong>CRUD Operations:</strong> Complete support for creating, reading, updating, and deleting travel listings.</li>
   <li><strong>Responsive Design:</strong> Custom CSS for a modern, clean look with Plus Jakarta Sans font.</li>  
