@@ -70,3 +70,5 @@ const listingItems = new Schema({
   country: { type: String }
 });
 </code></pre>
+
+<p align="center"> <strong>Note:</strong> WanderLust is actively under development, with continuous improvements and new features being added.</p>
