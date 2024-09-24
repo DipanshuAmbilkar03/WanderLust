@@ -10,7 +10,7 @@ const listingItems = new Schema({
         image : {
             type : String,
             set: (v) => 
-                v === "" ? "https://unsplash.com/photos/shallow-focus-photo-of-woman-in-beige-crew-neck-t-shirt-YvWJOXHNJ94" : v,
+                v === "" ? "https://www.britannica.com/science/beach" : v,
         },
         price : { 
             type : Number, 
