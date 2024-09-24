@@ -1,6 +1,6 @@
 <% layout("./layouts/boilerplate") %>
 
-<h1>All listing</h1>
+<h1>All Listings</h1>
     <!-- <form method="GET" action="listings/new" >
         <button>Create new Listings</button>
     </form> -->
@@ -12,6 +12,9 @@
                 <img src="<%= listing.image %>" 
                 class="card-img-top" alt="listings" 
                 style="height: 20rem;">
+
+                <!-- card image overlay -->
+                 <div class="card-img-overlay">20% OFF</div>
                 <div class="card-body">
                     <p class="card-text">
                     <b>Title : <%= listing.title %></b>
