@@ -4,7 +4,7 @@ const app = express();
 const path = require("path");
 const port = 8080; 
 const methodOverride = require('method-override');
-const ejsMate = require("ejs-mate")
+const ejsMate = require("ejs-mate");
 
 const Listing = require("./models/listing.js"); 
 
@@ -18,7 +18,6 @@ app.use(methodOverride('_method'));
 // use ejs-locals for all ejs templates:
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")))
-
 
 main()
     .then(() => {
