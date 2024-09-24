@@ -1,5 +1,5 @@
-body {
-    background: #c09b9b;
+.body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
 }
 
 /* nav-bar */
@@ -50,3 +50,29 @@ body {
     justify-content: center;
     align-items: space-between;
 }
+
+.card {
+    border : none !important;
+    margin-bottom : 2rem;
+}
+
+.card-img-top {
+    border-radius: 1rem !important; 
+    width : 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding : 0 !important; 
+}
+
+.card-text p{
+    font-weight : 700 ;
+}
+
+.linking-link {
+        text-decoration: none;
+}
+
+/* card effect */
+
