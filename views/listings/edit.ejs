@@ -1,5 +1,45 @@
 <% layout("./layouts/boilerplate") %>
 
+<style>
+/* nav */
+
+    /* footer */
+.f-info-links a {
+    text-decoration: none;
+    color : #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration : underline;
+}
+
+.f-info-socials, 
+.f-info-links,
+.f-info-brand
+{
+    width : 100%;
+    display : flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i {
+    margin-right : 1rem;
+    font-size: 1.38rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background: #ebebeb;
+    display : flex;
+    flex-wrap : wrap;
+    justify-content: center;
+    align-items: space-between;
+}
+
+</style>
+
 <div class="row">
     <div class="col-8 offset-2">
         <h3>Edit your listng</h3>
@@ -69,7 +109,7 @@
             </div>
             
 
-            <button class="btn btn-dark mb-5    ">submit</button>
+            <button class="btn btn-dark mb-5">submit</button>
         </form>
     </div>
 </div>
