@@ -76,8 +76,10 @@ app.put("/listings/:id" , async (req,res) => {
 })
 //  <------------------------------------------------------------------>
 // test delete this later
-app.get("/test" , (req , res) => {
-    res.render("./listings/test.ejs");
+app.get("/listings/:id/test" , async (req , res) => {
+    let { id } = req.params;
+    let listing = await Listing.findById(id);
+    res.render("./listings/test.ejs" , {listing});
 })
 //  <------------------------------------------------------------------>
 
