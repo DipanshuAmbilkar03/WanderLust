@@ -90,7 +90,13 @@
     background: white;
 }
 
-.btn {
+/* edit page's button  */
+.btn{
     background-color :#fe424d !important;
     border : 0.8px;
 }       
+
+/* show page */
+.show-img {
+    height : 42vh;
+}
