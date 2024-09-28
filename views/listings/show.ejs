@@ -1,33 +1,35 @@
 <% layout("./layouts/boilerplate") %>
 
 <div class="row mt-3">
-    <h3>Listing detail</h3>
-    <div class="col offset-2">
-        <div class="card col-7">
-            <img src="<%= listing.image %>" class="card-img-top show-img" alt="Image">
-            <div class="card-body">
-                <p class="card-text">
-                    <b>title : <%= listing.title %></b> <br>
-                    description :<%=listing.description%> <br>
-                    price : &#8377; <%=listing.price.toLocaleString("en-IN")%> <br>
-                    location :<%=listing.location%> <br>
-                    country :<%=listing.country%> <br>
-                </p>
-            </div>
+    <div class="col-8 offset-2">
+        <h3>Listing detail</h3>
+    </div>        
+    <div class="card col-6 offset-2 show-card"  >
+        <img 
+            src="<%= listing.image %>" 
+            class="card-img-top show-img" 
+            alt="Image"
+        >
+        <div class="card-body">
+            <p class="card-text">
+                <b><%= listing.title %></b> <br>
+                description : <%=listing.description%> <br>
+                price : &#8377; <%=listing.price.toLocaleString("en-IN")%> <br>
+                location : <%=listing.location%> <br>
+                country : <%=listing.country%> <br>
+            </p>
         </div>
+    </div>    
+    <br>
+    <div class="btns md-5">
+        <a 
+            class="btn btn-dark col-1 offset-2" 
+                href="/listings/<%=listing._id%>/edit">edit
+        </a>
+        <a 
+            class="btn btn-dark offset-1" 
+                href="/listings/<%=listing._id%>/delete">
+                delete
+        </a>
     </div>
-    
-    <div class="col-1">
-        <button><a class="btn btn-dark" href="/listings/<%=listing._id%>/edit">edit</a></button>
-    </div>
-
-    <div class="col-2">
-        <form action="/listings/<%=listing._id%>?_method=DELETE">
-            <button>delete</button>
-        </form>
-        <!-- <button><a class="btn btn-dark" href="/listings/<%=listing._id%>/delete">delete</a></button> -->
-    </div>
-
-    
 </div>
-
