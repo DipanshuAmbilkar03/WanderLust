@@ -74,7 +74,12 @@ app.put("/listings/:id" , async (req,res) => {
     await Listing.findByIdAndUpdate(id , {...req.body.listing});
     res.redirect(`/listings/${id}`);
 })
-
+//  <------------------------------------------------------------------>
+// test delete this later
+app.get("/test" , (req , res) => {
+    res.render("./listings/test.ejs");
+})
+//  <------------------------------------------------------------------>
 
 app.get("/", (req,res) => {
     res.send("this is root directory.")
