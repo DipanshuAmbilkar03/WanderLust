@@ -93,10 +93,24 @@
 /* edit page's button  */
 .btn{
     background-color :#fe424d !important;
-    border : 0.8px;
+    border : 0.8x;
 }       
 
 /* show page */
 .show-img {
     height : 42vh;
+}
+
+.btns {
+    display: flex;
+}
+
+.delbtn {
+    background: #000;
+    margin-left: 1rem;
+}
+
+.show-card {
+    padding-left : 0;
+
 }
