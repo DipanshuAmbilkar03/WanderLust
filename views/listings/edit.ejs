@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-8 offset-2">
         <h3>Edit your listng</h3>
-        <form method="POST" action="/listings/<%=listing._id %>?_method=PUT">
+        <form method="POST" action="/listings/<%=listing._id %>?_method=PUT" novalidate class="needs-validation">
             <div class="mb-3">
                 <label 
                     for="title" 
@@ -13,7 +13,11 @@
                     name="listing[title]"  
                         value="<%= listing.title %>" 
                             type="text" 
-                                class="form-control">
+                                class="form-control"
+                                required>
+                <div class="invalid-feedback">
+                    Please enter a valid title.
+                </div>
             </div>
             
             <div class="mb-3">
@@ -43,7 +47,11 @@
                             name="listing[price]"  
                                 value="<%= listing.price %>"
                                     class="form-control" 
-                                        type="number">
+                                        type="number"
+                                        required>
+                        <div class="invalid-feedback">
+                            Please enter a valid price.
+                        </div>
                     </div>
     
                     <div class="mb-3 col-md-8">
@@ -54,7 +62,11 @@
                             name="listing[location]" 
                                 value="<%= listing.location %>" 
                                     type="text" 
-                                        class="form-control">
+                                        class="form-control"
+                                        required>
+                        <div class="invalid-feedback">
+                            Please enter a valid location.
+                        </div>
                     </div>                     
                 </div>    
 
@@ -66,11 +78,35 @@
                     name="listing[country]" 
                         value="<%= listing.country %>" 
                             type="text" 
-                                class="form-control">
+                                class="form-control"
+                                required>
+                <div class="invalid-feedback">
+                    Please enter a valid country.
+                </div>
             </div>
             
-
             <button class="btn btn-dark mb-5">Edit</button>
         </form>
     </div>
 </div>
+
+<script>
+    (() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+        }, false)
+    })
+})()
+</script>
