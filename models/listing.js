@@ -10,7 +10,7 @@ const listingItems = new Schema({
         image : {
             type : String,
             set: (v) => 
-                v === "" ? "https://www.britannica.com/science/beach" : v,
+                v === " " ? "https://unsplash.com/photos/a-snow-covered-mountain-range-with-trees-in-the-foreground-oeFIfQ-LuJM" : v,
         },
         price : { 
             type : Number, 
