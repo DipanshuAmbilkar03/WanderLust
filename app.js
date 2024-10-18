@@ -6,6 +6,7 @@ const port = 8080;
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
 
+const wrapAsync = require("./utils/wrapAsync.js");
 const Listing = require("./models/listing.js"); 
 
 
@@ -27,7 +28,7 @@ main()
 
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+    await mongoose.connect(MONGO_URL);
 }
 
 app.get("/listings" , async (req,res) => {
@@ -50,10 +51,15 @@ app.get("/listings/:id",async (req,res) => {
     res.render("./listings/show.ejs" , {listing});
 })
 
-app.post("/listings", async(req,res) => {
-    const newListing = new Listing(req.body.listing);
-    await newListing.save();
-    res.redirect("/listings");
+// create post request
+app.post("/listings", async(req,res,next) => {
+    try {
+        const newListing = new Listing(req.body.listing);
+        await newListing.save();
+        res.redirect("/listings");
+    } catch (err) {
+        next(err);
+    }
 })
 
 app.get("/listings/:id/edit" , async (req,res) => {
@@ -104,6 +110,11 @@ app.get("/", (req,res) => {
     // console.log("sample was saved.");
 //     res.send("successfully tested")
 // });
+
+app.use((err, req, res, next) => {
+    res.send("something failed")
+})
+
 
 app.listen(port, () => {
     console.log("app is listening to port 8080")
