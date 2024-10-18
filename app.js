@@ -144,10 +144,10 @@ app.use((err, req, res, next) => {
     // res.status(statusCode).send(message);
 
     // for message handling
-    res.render("error.ejs",{err});
+    // res.render("error.ejs",{message});
 
     // for error handling
-    res.render("error.ejs", {err});
+    res.status(statusCode).render("error.ejs", {err});
 
     // for random error handling
     // res.send("something failed");
