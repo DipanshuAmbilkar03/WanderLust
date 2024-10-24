@@ -6,6 +6,7 @@ const path = require("path");
 const port = 8080; 
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
+const { listingSchema } = require("./schema.js");
 
 const Listing = require("./models/listing.js"); 
 
@@ -71,8 +72,17 @@ app.post("/listings", wrapAsync(async(req,res,next) => {
     if(!req.body.listing) {
         throw new expressError(400 , "Please provide a listing.");
     }
-    
     const newListing = new Listing(req.body.listing);
+
+    if(!newListing.title) {
+        throw new expressError(400, "Please provide a title for the listing.");
+    }
+    if(!newListing.description) {
+        throw new expressError(400, "Please provide a description for the listing.");
+    }
+    if(!newListing.location) {
+        throw new expressError(400, "Please provide a location for the listing.");
+    }
     await newListing.save();
     res.redirect("/listings");
 }))
