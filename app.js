@@ -23,6 +23,7 @@ app.use(methodOverride('_method'));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")))
 
+
 main()
     .then(() => {
         console.log("connected to DataBase");
@@ -33,6 +34,22 @@ main()
 async function main() {
     await mongoose.connect(MONGO_URL);
 }
+
+
+const validateFunc = (req, res, next) => {
+    // using JOI
+    let {error} = listingSchema.validate(req.body);
+    
+    if(error) {
+        let errMsg = error.details.map(
+            (el) => el.message
+        ).join(","); 
+        throw new expressError(400 , error);
+    }else {
+        next();
+    }
+}
+
 
 app.get("/listings" , wrapAsync(async (req,res) => {
     const allListing  = await Listing.find({});
@@ -68,21 +85,33 @@ app.get("/listings/:id",wrapAsync(async (req,res) => {
 // })
 
 // server side error handling 
-app.post("/listings", wrapAsync(async(req,res,next) => {
-    if(!req.body.listing) {
-        throw new expressError(400 , "Please provide a listing.");
+app.post("/listings", 
+    validateFunc,
+    wrapAsync(async(req,res,next) => {
+    // if(!req.body.listing) {
+    //     throw new expressError(400 , "Please provide a listing.");
+    // }
+
+    // using JOI
+    let result_of_listingSchema = listingSchema.validate(req.body);
+    console.log(result_of_listingSchema);
+    
+    if(result_of_listingSchema.error){
+        throw new expressError(400 , result_of_listingSchema.error);
     }
+
     const newListing = new Listing(req.body.listing);
 
-    if(!newListing.title) {
-        throw new expressError(400, "Please provide a title for the listing.");
-    }
-    if(!newListing.description) {
-        throw new expressError(400, "Please provide a description for the listing.");
-    }
-    if(!newListing.location) {
-        throw new expressError(400, "Please provide a location for the listing.");
-    }
+    // if(!newListing.title) {
+    //     throw new expressError(400, "Please provide a title for the listing.");
+    // }
+    // if(!newListing.description) {
+    //     throw new expressError(400, "Please provide a description for the listing.");
+    // }
+    // if(!newListing.location) {
+    //     throw new expressError(400, "Please provide a location for the listing.");
+    // }
+
     await newListing.save();
     res.redirect("/listings");
 }))
@@ -100,19 +129,25 @@ app.get("/listings/:id/delete" , wrapAsync(async (req,res) => {
     res.redirect(`/listings`);
 }))
 
-app.put("/listings/:id" , wrapAsync(async (req,res) => {
-    let { id } = req.params;
-    await Listing.findByIdAndUpdate(id , {...req.body.listing});
-    res.redirect(`/listings/${id}`);
+app.put(
+    "/listings/:id" 
+    ,wrapAsync(async (req,res) => {
+        // if(!req.body.listing) {
+        //     throw new expressError(400, "send a valid listing data");
+        // }
+        let { id } = req.params;
+        await Listing.findByIdAndUpdate(id , {...req.body.listing});
+        res.redirect(`/listings/${id}`);
 }))
 
 //  <------------------------------------------------------------------>
 // test delete this later
-app.post("/listings/:id/test" , wrapAsync(async (req , res) => {
-    let { id } = req.params;
-    let listing = await Listing.findById(id);
-    res.render("./listings/test.ejs" , {listing});
-}))
+
+// app.post("/listings/:id/test" , wrapAsync(async (req , res) => {
+//     let { id } = req.params;
+//     let listing = await Listing.findById(id);
+//     res.render("./listings/test.ejs" , {listing});
+// }))
 
 //  <------------------------------------------------------------------>
 
@@ -140,9 +175,9 @@ app.get("/", (req,res) => {
 
 // error for an entirly different api route
 app.all("*" , (req, res, next) => {
-    next(new expressError("404" , "Page Not Found!"))
+    next(new expressError(404 , "Page Not Found!"))
 })
-
+    
 // error middleware
 // app.use((err, req, res, next) => {
 //     res.send("something failed")
