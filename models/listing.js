@@ -9,6 +9,8 @@ const listingItems = new Schema({
         description : String,
         image : {
             type : String,
+            default:
+                "https://unsplash.com/photos/a-snow-covered-mountain-range-with-trees-in-the-foreground-oeFIfQ-LuJM",
             set: (v) => 
                 v === " " ? "https://unsplash.com/photos/a-snow-covered-mountain-range-with-trees-in-the-foreground-oeFIfQ-LuJM" : v,
         },
