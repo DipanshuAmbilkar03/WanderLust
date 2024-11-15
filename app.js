@@ -50,7 +50,6 @@ const validateFunc = (req, res, next) => {
     }
 }
 
-
 app.get("/listings" , wrapAsync(async (req,res) => {
     const allListing  = await Listing.find({});
     res.render('./listings/index.ejs', { allListing });
