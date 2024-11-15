@@ -7,7 +7,6 @@ const port = 8080;
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
 const { listingSchema } = require("./schema.js");
-
 const Listing = require("./models/listing.js"); 
 
 const wrapAsync = require("./utils/wrapAsync.js");
@@ -50,6 +49,15 @@ const validateFunc = (req, res, next) => {
     }
 }
 
+// const validateFunc = (req, res, next) => {
+//     const { error } = listingSchema.validate(req.body);
+//     if (error) {
+//         const errorMsg = error.details.map((el) => el.message).join(",");
+//         return res.status(400).send(errorMsg);
+//     }
+//     next();
+// };
+
 app.get("/listings" , wrapAsync(async (req,res) => {
     const allListing  = await Listing.find({});
     res.render('./listings/index.ejs', { allListing });
@@ -90,6 +98,8 @@ app.post("/listings",
     // if(!req.body.listing) {
     //     throw new expressError(400 , "Please provide a listing.");
     // }
+
+    console.log("Request Body:", req.body.listing);
 
     // using JOI
     let result_of_listingSchema = listingSchema.validate(req.body);
