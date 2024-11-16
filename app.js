@@ -12,6 +12,8 @@ const Listing = require("./models/listing.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const expressError = require("./utils/expressError.js");
 
+const Review = require("./models/review.js"); 
+
 let MONGO_URL = 'mongodb://127.0.0.1:27017/WanderLust';
 
 app.set("view engine" , "ejs");
@@ -137,6 +139,25 @@ app.get("/listings/:id/delete" , wrapAsync(async (req,res) => {
     console.log(deletedListing);
     res.redirect(`/listings`);
 }))
+
+// Review
+app.post("/listings/:id/reviews" , async(req,res) => {
+    let listing = await Listing.findById(req.params.id);
+    
+    // reviews object
+    // console.log(req.body.review);
+
+    let newReview = new Review(req.body.review);
+
+
+    listing.reviews.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+
+    console.log("new review is saved");
+    res.send("review saved");
+}) 
 
 app.put(
     "/listings/:id" 
