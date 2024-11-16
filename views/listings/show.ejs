@@ -45,15 +45,14 @@
     </div>
     
     <div>
-
     <hr class="mt-3">
         <form class="col-8 offset-2" action="/listings/<%=listing._id%>/reviews" method="POST">
             <h4>Please Review</h4>
             <div>
                 <label for="rating" class="form-label"></label>
-                <input type="range" min="1" max="5" id="rating" class="form-range">
+                <input name="review[rating]" type="range" min="1" max="5" id="rating" class="form-range">
             </div>
-            <div>
+            <div class="md-3 mt-3">
                 <label for="comment" class="form-label">Comment</label>
                 <textarea  class="form-control" name="review[comment]" id="comment" cols="30" rows="5"></textarea>
             </div>
