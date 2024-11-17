@@ -11,12 +11,26 @@ module.exports.listingSchema = Joi.object({
     }).required()  
 });
 
+// module.exports.reviewSchema = Joi.object({
+//     review : Joi.object({
+//         rating: Joi.number().required(),
+//         comment: Joi.string().required(),
+//     }).required(),
+// })
+
+// Schema for validating reviews
 module.exports.reviewSchema = Joi.object({
-    review : Joi.object({
-        rating: Joi.number().required(),
-        comment: Joi.string().required(),
+    review: Joi.object({
+      rating: Joi.number().min(1).max(5).required().messages({
+        'number.base': 'Rating must be a number.',
+        'number.min': 'Rating must be at least 1.',
+        'number.max': 'Rating must be at most 5.',
+      }),
+      comment: Joi.string().trim().required().messages({
+        'string.empty': 'Comment is required.',
+      }),
     }).required(),
-})
+  });
 
 // const Joi = require('joi');
 

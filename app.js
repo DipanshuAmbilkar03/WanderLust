@@ -51,6 +51,21 @@ const validateFunc = (req, res, next) => {
     }
 }
 
+// validate review function 
+const validateReview = (req, res, next) => {
+    // using JOI
+    let {error} = reviewSchema.validate(req.body);
+    
+    if(error) {
+        let errMsg = error.details.map(
+            (el) => el.message
+        ).join(","); 
+        throw new expressError(400 , error);
+    }else {
+        next();
+    }
+}
+
 // const validateFunc = (req, res, next) => {
 //     const { error } = listingSchema.validate(req.body);
 //     if (error) {
@@ -141,7 +156,7 @@ app.get("/listings/:id/delete" , wrapAsync(async (req,res) => {
 }))
 
 // Review
-app.post("/listings/:id/reviews" , async(req,res) => {
+app.post("/listings/:id/reviews" ,validateReview, wrapAsync(async(req,res) => {
     let listing = await Listing.findById(req.params.id);
     
     // reviews object
@@ -157,7 +172,7 @@ app.post("/listings/:id/reviews" , async(req,res) => {
 
     console.log("new review is saved");
     res.send("review saved");
-}) 
+})); 
 
 app.put(
     "/listings/:id" 
@@ -230,4 +245,4 @@ app.use((err, req, res, next) => {
 
 app.listen(port, () => {
     console.log("app is listening to port 8080")
-});
+}); 
