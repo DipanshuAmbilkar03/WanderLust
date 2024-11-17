@@ -44,17 +44,12 @@
         </a>
     </div>
     
-    <div>
-    <hr class="mt-3">
-        <form 
-            class="col-8 offset-2" 
-                action="/listings/<%=listing._id%>/reviews" 
-                    method="POST" 
-                        class="needs-validation" 
-                            novalidate>
-            <h4>Please leave Review</h4>
+    <div class="col-8 offset-2">
+        <hr class="mt-3">
+        <form action="/listings/<%=listing._id%>/reviews" method="POST" novalidate class="needs-validation">
+            <h4>Leave Review</h4>
             <div>
-                <label for="rating" class="form-label"></label>
+                <label for="rating" class="form-label">Rating</label>
                 <input 
                     name="review[rating]" 
                         type="range" 
@@ -65,15 +60,16 @@
             </div>
             <div class="md-3 mt-3">
                 <label for="comment" class="form-label">Comment</label>
-                <textarea  
-                    class="form-control" 
+                <textarea
+                    class="form-control"
                         name="review[comment]" 
                             id="comment" 
                                 cols="30" 
-                                    rows="5" 
+                                    rows="5"
                                         required></textarea>
+                <div class="invalid-feedback">Please add a comment</div>
             </div>
-                <button class="btn btn-dark mt-3 ">Submit Review</button>
+            <button class="btn btn-dark mt-3">Submit Review</button>
         </form>    
     </div>
 </div>
