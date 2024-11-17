@@ -6,7 +6,7 @@ const path = require("path");
 const port = 8080; 
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
-const { listingSchema } = require("./schema.js");
+const { listingSchema , reviewSchema } = require("./schema.js");
 const Listing = require("./models/listing.js"); 
 
 const wrapAsync = require("./utils/wrapAsync.js");
