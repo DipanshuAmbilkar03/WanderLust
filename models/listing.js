@@ -33,7 +33,11 @@ const listingItems = new Schema({
     });
 
 // mongoose listing and review middeleWare
-listingSchema.post("findOneAndDelete) 
+listingSchema.post("findOneAndDelete" , async(listings)=>{
+    if(listings) {
+        await Review.deleteMany({_id: {$in : listings.reviews}});
+    }
+});
 
 const listing = mongoose.model("listing",listingItems);
 module.exports = listing;
