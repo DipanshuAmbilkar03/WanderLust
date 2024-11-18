@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const { listingSchema } = require("../schema");
 const Schema = mongoose.Schema;
+const Review = require("./review.js"); 
 
 const listingItems = new Schema({
         title : { 
@@ -33,11 +33,11 @@ const listingItems = new Schema({
     });
 
 // mongoose listing and review middeleWare
-listingSchema.post("findOneAndDelete" , async(listings)=>{
-    if(listings) {
-        await Review.deleteMany({_id: {$in : listings.reviews}});
+listingItems.post("findOneAndDelete" , async(listing)=>{
+    if(listing) {
+        await Review.deleteMany({_id: {$in : listing.reviews}});
     }
 });
 
-const listing = mongoose.model("listing",listingItems);
-module.exports = listing;
+const Listing = mongoose.model("listing",listingItems);
+module.exports = Listing;
