@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { listingSchema } = require("../schema");
 const Schema = mongoose.Schema;
 
 const listingItems = new Schema({
@@ -31,6 +32,8 @@ const listingItems = new Schema({
         ]
     });
 
-const listing = mongoose.model("listing",listingItems);
+// mongoose listing and review middeleWare
+listingSchema.post("findOneAndDelete) 
 
+const listing = mongoose.model("listing",listingItems);
 module.exports = listing;
