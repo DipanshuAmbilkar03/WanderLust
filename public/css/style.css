@@ -91,10 +91,15 @@
 }
 
 /* edit page's button  */
-.btn{
+.btn {
     background-color :#fe424d !important;
     border : 0.8x;
-}       
+}
+
+.new_btn {
+    background-color: #000;
+    border : 0.8x;
+}
 
 /* show page */
 .show-img {
