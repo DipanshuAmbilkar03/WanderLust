@@ -171,6 +171,9 @@ app.post("/listings/:id/reviews" ,validateReview, wrapAsync(async(req,res) => {
     await listing.save();
 
     console.log("new review is saved");
+    
+    let {id} = req.params;
+    res.redirect(`/listings/${id}`);
 })); 
 
 // delete the review
