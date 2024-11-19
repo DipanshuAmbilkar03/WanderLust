@@ -2,19 +2,19 @@ const express = require("express");
 const router = express.Router();
 
 // user
-router.get("/user" , (req,res) => {
+router.get("/" , (req,res) => {
     res.send("Got user");
 });
 
-router.get("/user/:id" , (req,res) => {
+router.get("/:id" , (req,res) => {
     res.send("Got user id");});
 
 
-router.post("/user" , (req,res) => {
+router.post("/" , (req,res) => {
     res.send("posted user");});
 
 
-router.delete("/user" , (req,res) => {
+router.delete("/:id" , (req,res) => {
     res.send("deleted user");});
 
-module.exports = routers;
+module.exports = router;
