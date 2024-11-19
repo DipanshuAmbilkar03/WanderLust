@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+// requirements :
+const users = require("./routes/user.js");
+
 // user
 app.get("/user" , (req,res) => {
     res.send("Got user");
@@ -35,7 +38,7 @@ app.delete("/post" , (req,res) => {
     res.send("delete the post");
 });
 
-
+// root directory
 app.get("/" , (req,res) => {
     res.send("Root directory");
 });
