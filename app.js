@@ -65,6 +65,51 @@ const validateReview = (req, res, next) => {
 
 app.use("/listings" , listings);    
 
+
+// Review
+app.post("/listings/:id/reviews" ,validateReview, wrapAsync(async(req,res) => {
+    let listing = await Listing.findById(req.params.id);
+
+    // reviews object
+    // console.log(req.body.review);
+
+    let newReview = new Review(req.body.review);
+
+
+    listing.reviews.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+
+    console.log("new review is saved");
+    
+    let {id} = req.params;
+    res.redirect(`/listings/${id}`);
+})); 
+
+// delete the review
+app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async(req,res) => {
+    let {id, reviewId} = req.params;
+    
+    await Listing.findByIdAndUpdate(id , {$pull : {reviews : reviewId}});
+    await Review.findByIdAndDelete(reviewId);
+    
+    res.redirect(`/listings/${id}`);
+}));
+
+
+app.put(
+    "/listings/:id" 
+    ,wrapAsync(async (req,res) => {
+        // if(!req.body.listing) {
+        //     throw new expressError(400, "send a valid listing data");
+        // }
+        let { id } = req.params;
+        await Listing.findByIdAndUpdate(id , {...req.body.listing});
+        res.redirect(`/listings/${id}`);
+}))
+
+
 app.get("/", (req,res) => {
     res.send("this is root directory.")
     // console.log("this is root route.")
