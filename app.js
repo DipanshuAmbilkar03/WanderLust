@@ -6,19 +6,16 @@ const path = require("path");
 const port = 8080; 
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
-const { listingSchema , reviewSchema } = require("./schema.js");
-const Listing = require("./models/listing.js"); 
-
-const wrapAsync = require("./utils/wrapAsync.js");
 const expressError = require("./utils/expressError.js");
-
-const Review = require("./models/review.js"); 
-
+ 
+// express routers
 const listings = require("./routes/listings.js");
 const reviews = require("./routes/review.js");
 
+// Mongoose connections
 let MONGO_URL = 'mongodb://127.0.0.1:27017/WanderLust';
 
+// middleWares
 app.set("view engine" , "ejs");
 app.set("views" , path.join(__dirname , "./views"));
 app.use(express.urlencoded({extended : true}));
@@ -28,19 +25,21 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")))
 
 
+// main connection
 main()
     .then(() => {
         console.log("connected to DataBase");
     })
     .catch((err) => console.log(err));
 
-
 async function main() {
     await mongoose.connect(MONGO_URL);
 }
 
+// listings 
 app.use("/listings" , listings); 
-app.use("/reviews" , reviews);    
+// reviews
+app.use("/listings/:id/reviews" , reviews);    
 
 
 app.get("/", (req,res) => {
@@ -49,7 +48,6 @@ app.get("/", (req,res) => {
 })
 
 // data initialization 
-
 // app.get("/testListing", async (req,res) => {
     // let sampleListing = new Listing(
     //     {

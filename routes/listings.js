@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express();
 const wrapAsync = require("../utils/wrapAsync.js");
-const { listingSchema , reviewSchema } = require("../schema.js");
+const { listingSchema } = require("../schema.js");
 const Listing = require("../models/listing.js"); 
 const expressError = require("../utils/expressError.js");
 
@@ -15,7 +15,7 @@ const validateFunc = (req, res, next) => {
         let errMsg = error.details.map(
             (el) => el.message
         ).join(","); 
-        throw new expressError(400 , error);
+        throw new expressError(400 , errMsg);
     }else {
         next();
     }
@@ -120,6 +120,18 @@ router.get("/:id/delete" , wrapAsync(async (req,res) => {
 // }))
 
 //  <------------------------------------------------------------------>
+
+router.put(
+    "/:id" 
+    ,wrapAsync(async (req,res) => {
+        // if(!req.body.listing) {
+        //     throw new expressError(400, "send a valid listing data");
+        // }
+        let { id } = req.params;
+        let err = await Listing.findByIdAndUpdate(id , {...req.body.listing});
+        console.log("error : ", err);
+        res.redirect(`/listings/${id}`);
+}))
 
 
 module.exports = router;
