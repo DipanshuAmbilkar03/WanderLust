@@ -21,20 +21,14 @@ const validateFunc = (req, res, next) => {
     }
 }
 
-// validate review function 
-const validateReview = (req, res, next) => {
-    // using JOI
-    let {error} = reviewSchema.validate(req.body);
-    
-    if(error) {
-        let errMsg = error.details.map(
-            (el) => el.message
-        ).join(","); 
-        throw new expressError(400 , error);
-    }else {
-        next();
-    }
-}
+// const validateFunc = (req, res, next) => {
+//     const { error } = listingSchema.validate(req.body);
+//     if (error) {
+//         const errorMsg = error.details.map((el) => el.message).join(",");
+//         return res.status(400).send(errorMsg);
+//     }
+//     next();
+// };
 
 router.get("/" , wrapAsync(async (req,res) => {
     const allListing  = await Listing.find({});

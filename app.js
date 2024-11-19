@@ -15,6 +15,7 @@ const expressError = require("./utils/expressError.js");
 const Review = require("./models/review.js"); 
 
 const listings = require("./routes/listings.js");
+const reviews = require("./routes/review.js");
 
 let MONGO_URL = 'mongodb://127.0.0.1:27017/WanderLust';
 
@@ -38,76 +39,8 @@ async function main() {
     await mongoose.connect(MONGO_URL);
 }
 
-
-// validate review function 
-const validateReview = (req, res, next) => {
-    // using JOI
-    let {error} = reviewSchema.validate(req.body);
-    
-    if(error) {
-        let errMsg = error.details.map(
-            (el) => el.message
-        ).join(","); 
-        throw new expressError(400 , error);
-    }else {
-        next();
-    }
-}
-
-// const validateFunc = (req, res, next) => {
-//     const { error } = listingSchema.validate(req.body);
-//     if (error) {
-//         const errorMsg = error.details.map((el) => el.message).join(",");
-//         return res.status(400).send(errorMsg);
-//     }
-//     next();
-// };
-
-app.use("/listings" , listings);    
-
-
-// Review
-app.post("/listings/:id/reviews" ,validateReview, wrapAsync(async(req,res) => {
-    let listing = await Listing.findById(req.params.id);
-
-    // reviews object
-    // console.log(req.body.review);
-
-    let newReview = new Review(req.body.review);
-
-
-    listing.reviews.push(newReview);
-
-    await newReview.save();
-    await listing.save();
-
-    console.log("new review is saved");
-    
-    let {id} = req.params;
-    res.redirect(`/listings/${id}`);
-})); 
-
-// delete the review
-app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async(req,res) => {
-    let {id, reviewId} = req.params;
-    
-    await Listing.findByIdAndUpdate(id , {$pull : {reviews : reviewId}});
-    await Review.findByIdAndDelete(reviewId);
-    
-    res.redirect(`/listings/${id}`);
-}));
-
-
-app.put(
-    "/listings/:id" 
-    ,wrapAsync(async (req,res) => {
-        // if(!req.body.listing) {
-        //     throw new expressError(400, "send a valid listing data");
-        // }
-        let { id } = req.params;
-        await Listing.findByIdAndUpdate(id , {...req.body.listing});
-        res.redirect(`/listings/${id}`);
-}))
+app.use("/listings" , listings); 
+app.use("/reviews" , reviews);    
 
 
 app.get("/", (req,res) => {
