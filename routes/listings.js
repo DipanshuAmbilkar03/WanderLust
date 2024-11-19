@@ -1,6 +1,23 @@
 const express = require("express");
 const router = express();
+const wrapAsync = require("../utils/wrapAsync.js");
 
+
+
+// validation lisitings
+const validateFunc = (req, res, next) => {
+    // using JOI
+    let {error} = listingSchema.validate(req.body);
+    
+    if(error) {
+        let errMsg = error.details.map(
+            (el) => el.message
+        ).join(","); 
+        throw new expressError(400 , error);
+    }else {
+        next();
+    }
+}
 
 router.get("/" , wrapAsync(async (req,res) => {
     const allListing  = await Listing.find({});

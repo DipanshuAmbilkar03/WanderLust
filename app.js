@@ -38,6 +38,21 @@ async function main() {
     await mongoose.connect(MONGO_URL);
 }
 
+
+const validateFunc = (req, res, next) => {
+    // using JOI
+    let {error} = listingSchema.validate(req.body);
+    
+    if(error) {
+        let errMsg = error.details.map(
+            (el) => el.message
+        ).join(","); 
+        throw new expressError(400 , error);
+    }else {
+        next();
+    }
+}
+
 // validate review function 
 const validateReview = (req, res, next) => {
     // using JOI
