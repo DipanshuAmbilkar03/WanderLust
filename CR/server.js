@@ -5,6 +5,11 @@ const app = express();
 const users = require("./routes/user.js");
 const posts = require("./routes/post.js");
 
+// cookies parser requirement 
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
+
 // cookies 
 app.get("/getcookies" , (req, res) => {
     res.cookie("Greet" , "hello");
@@ -14,10 +19,9 @@ app.get("/getcookies" , (req, res) => {
 
 // root directory
 app.get("/" , (req,res) => {
+    console.dir(req.cookies);
     res.send("Root directory");
 });
-
-
 
 app.use("/user" ,users);
 app.use("/post" ,posts);
