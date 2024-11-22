@@ -17,6 +17,11 @@ app.get("/getcookies" , (req, res) => {
     res.send("cookies send!");
 })
 
+app.get("/greet" ,(req,res) => {
+    let {name = "anonymus"} = req.cookies;
+    res.send(`hello ,${name}`);
+})
+
 // root directory
 app.get("/" , (req,res) => {
     console.dir(req.cookies);
