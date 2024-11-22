@@ -7,7 +7,7 @@ const port = 8080;
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
 const expressError = require("./utils/expressError.js");
- 
+
 // express routers
 const listings = require("./routes/listings.js");
 const reviews = require("./routes/review.js");
@@ -20,6 +20,7 @@ app.set("view engine" , "ejs");
 app.set("views" , path.join(__dirname , "./views"));
 app.use(express.urlencoded({extended : true}));
 app.use(methodOverride('_method'));
+
 // use ejs-locals for all ejs templates:
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")))
@@ -44,7 +45,7 @@ app.use("/listings/:id/reviews" , reviews);
 
 app.get("/", (req,res) => {
     res.send("this is root directory.")
-    // console.log("this is root route.")
+    // console.log("this is root route.");
 })
 
 // data initialization 
@@ -70,7 +71,7 @@ app.all("*" , (req, res, next) => {
     
 // error middleware
 // app.use((err, req, res, next) => {
-//     res.send("something failed")
+//     res.send("something failed");
 // })
 
 // error middleware using expressclass
