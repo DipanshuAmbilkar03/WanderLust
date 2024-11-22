@@ -8,12 +8,20 @@ const posts = require("./routes/post.js");
 // cookies parser requirement 
 const cookieParser = require("cookie-parser");
 
+// cookies code 
 app.use(cookieParser("secretcode"));
 
+// signed cookies 
 app.get("/getsigncookies",(req,res) => {
     res.cookie("madeIn","India",{signed : true});
     res.send("signed send!");
     console.dir(req.cookies);
+})
+
+// verifing signed cookies 
+app.get("/verifycookies" , (req,res) => {
+    console.log(req.signedCookies);
+    res.send("verified");
 })
 
 // cookies 
