@@ -12,19 +12,23 @@ const sessionOpt = {
                     saveUninitialized : true
                     };
 
+const flash = require("connect-flash")
+
 app.use(session(sessionOpt));
+app.use(flash());
 
 // register 
 app.get("/register" , (req,res) => {
     let { name = "anonymous"} = req.query;
     req.session.name = name;
+    req.flash("Successful","User Name Added");
     console.log(req.session.name);
     res.send(name);
 })
 
 // to say hello to the given query name
 app.get("/hello",(req,res) => {
-    
+
     res.send(`hello ${req.session.name}`)
 })
 
