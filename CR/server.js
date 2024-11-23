@@ -13,9 +13,13 @@ const sessionOpt = {
                     };
 
 const flash = require("connect-flash")
+const path = require("path");
 
 app.use(session(sessionOpt));
 app.use(flash());
+
+app.set("view engine", "ejs");
+app.set("views" , path.join(__dirname,"./views"));
 
 // register 
 app.get("/register" , (req,res) => {
@@ -23,13 +27,13 @@ app.get("/register" , (req,res) => {
     req.session.name = name;
     req.flash("Successful","User Name Added");
     console.log(req.session.name);
-    res.send(name);
+    res.redirect("/hello");
 })
 
 // to say hello to the given query name
 app.get("/hello",(req,res) => {
-
-    res.send(`hello ${req.session.name}`)
+    console.log( req.flash("Successful"));
+    res.render("page.ejs",{name :req.session.name});
 })
 
 // count number of sessions 
