@@ -5,46 +5,29 @@ const app = express();
 const users = require("./routes/user.js");
 const posts = require("./routes/post.js");
 
-// cookies parser requirement 
-const cookieParser = require("cookie-parser");
+const session = require("express-session");
 
-// cookies code 
-app.use(cookieParser("secretcode"));
 
-// signed cookies 
-app.get("/getsigncookies",(req,res) => {
-    res.cookie("madeIn","India",{signed : true});
-    res.send("signed send!");
-    console.dir(req.cookies);
+app.use(session({secret : "dontlookumfinmybusiness", resave : false,saveUninitialized : true}));
+
+app.get("/getcount" , (req,res) => {
+    if(req.session.count) {
+        req.session.count++;
+    }else{
+        req.session.count = 1;
+    }
+    
+    res.send(`total count is ${req.session.count} times`);
 })
 
-// verifing signed cookies 
-app.get("/verifycookies" , (req,res) => {
-    console.log(req.signedCookies);
-    res.send("verified");
+app.get("/test" , (req,res) => {
+    res.send(`this ia a test    `);  
 })
 
-// cookies 
-app.get("/getcookies" , (req, res) => {
-    res.cookie("Greet" , "hello");
-    res.cookie("Warning" , "You are being tracked");
-    res.send("cookies send!");
-})
-
-app.get("/greet" ,(req,res) => {
-    let {name = "anonymus"} = req.cookies;
-    res.send(`hello ,${name}`);
-})
-
-// root directory
 app.get("/" , (req,res) => {
-    console.dir(req.cookies);
-    res.send("Root directory");
-});
+    res.send(`this is root directory`);
+})
 
-app.use("/user" ,users);
-app.use("/post" ,posts);
-
-app.listen("3000" , ()=> {
+app.listen(3000 , () => {
     console.log(`listening to port 3000`);
-});
+})
