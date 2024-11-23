@@ -25,15 +25,13 @@ app.set("views" , path.join(__dirname,"./views"));
 app.get("/register" , (req,res) => {
     let { name = "anonymous"} = req.query;
     req.session.name = name;
-    req.flash("Successful","User Name Added");
-    console.log(req.session.name);
+    req.flash("success","successfully user name added!");
     res.redirect("/hello");
 })
 
 // to say hello to the given query name
 app.get("/hello",(req,res) => {
-    console.log( req.flash("Successful"));
-    res.render("page.ejs",{name :req.session.name});
+    res.render("page.ejs",{name : req.session.name, msg: req.flash("success")});
 })
 
 // count number of sessions 
