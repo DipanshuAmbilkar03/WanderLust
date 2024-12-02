@@ -30,8 +30,13 @@ app.get("/register" , (req,res) => {
 })
 
 // to say hello to the given query name
+// app.get("/hello",(req,res) => {
+//     res.render("page.ejs",{name : req.session.name, msg: req.flash("success")});
+// })
+
 app.get("/hello",(req,res) => {
-    res.render("page.ejs",{name : req.session.name, msg: req.flash("success")});
+    res.locals.msg = req.flash("success");
+    res.render("page.ejs",{name : req.session.name});
 })
 
 // count number of sessions 
