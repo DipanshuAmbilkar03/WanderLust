@@ -7,6 +7,22 @@ const port = 8080;
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
 const expressError = require("./utils/expressError.js");
+const session = require("express-session");
+
+// session 
+const sessionOption = {
+    secret : "Yohohohoho_bybrook",
+    resave : false,
+    saveUninititalize : true, 
+    cookie: {
+        expires : Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge : 7 * 24 * 60 * 60 * 1000,
+        // for cross scripting attack
+        httpOnly : true,
+    },
+};
+
+app.use(session(sessionOption));
 
 // express routers
 const listings = require("./routes/listings.js");
