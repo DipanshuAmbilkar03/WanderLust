@@ -42,7 +42,12 @@ app.get("/register" , (req,res) => {
 
 app.get("/hello",(req,res) => {
     // explicit msg passing
-    res.locals.msg = req.flash("success");
+    // res.locals.msg = req.flash("success");
+
+    // seperate variables for msg
+    res.locals.successMsg = req.flash("success");
+    res.locals.errorMsg = req.flash("error");
+    
     res.render("page.ejs",{name : req.session.name});
 })
 
