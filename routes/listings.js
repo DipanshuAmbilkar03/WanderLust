@@ -71,7 +71,7 @@ router.post("/",
     //     throw new expressError(400 , "Please provide a listing.");
     // }
 
-    console.log("Request Body:", req.body.listing);
+    // console.log("Request Body:", req.body.listing);
 
     // using JOI
     let result_of_listingSchema = listingSchema.validate(req.body);
@@ -94,6 +94,7 @@ router.post("/",
     // }
 
     await newListing.save();
+    req.flash("success" , "new Listing added!");
     res.redirect("/listings");
 }))
 
