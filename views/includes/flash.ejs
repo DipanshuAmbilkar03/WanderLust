@@ -1,5 +1,7 @@
 <% if(success && success.length) { %>
-    <div class="alert alert-primary" role="alert">
+    <div class="alert alert-success alert-dismissible fade show cols-6 " role="alert">
         <%= success %>
+        <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    
 <% } %>
