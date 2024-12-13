@@ -21,6 +21,12 @@ app.use(flash());
 app.set("view engine", "ejs");
 app.set("views" , path.join(__dirname,"./views"));
 
+app.use((req,res,next) => {
+    res.locals.successMsg = req.flash("success");
+    res.locals.errorMsg = req.flash("error");
+    next();
+})
+
 // register 
 app.get("/register" , (req,res) => {
     let { name = "anonymous"} = req.query;
@@ -45,8 +51,8 @@ app.get("/hello",(req,res) => {
     // res.locals.msg = req.flash("success");
 
     // seperate variables for msg
-    res.locals.successMsg = req.flash("success");
-    res.locals.errorMsg = req.flash("error");
+    // res.locals.successMsg = req.flash("success");
+    // res.locals.errorMsg = req.flash("error");
     
     res.render("page.ejs",{name : req.session.name});
 })
