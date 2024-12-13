@@ -25,7 +25,13 @@ app.set("views" , path.join(__dirname,"./views"));
 app.get("/register" , (req,res) => {
     let { name = "anonymous"} = req.query;
     req.session.name = name;
-    req.flash("success","successfully user name added!");
+
+    if(name == "anonymous") {
+        req.flash("error"," user not registered!");
+    }else{
+        req.flash("success","successfully user name added!");
+    }
+
     res.redirect("/hello");
 })
 
@@ -35,6 +41,7 @@ app.get("/register" , (req,res) => {
 // })
 
 app.get("/hello",(req,res) => {
+    // explicit msg passing
     res.locals.msg = req.flash("success");
     res.render("page.ejs",{name : req.session.name});
 })
