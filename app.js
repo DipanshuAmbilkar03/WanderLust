@@ -8,6 +8,7 @@ const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
 const expressError = require("./utils/expressError.js");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 // session 
 const sessionOption = {
@@ -22,7 +23,17 @@ const sessionOption = {
     },
 };
 
+// session middleware
 app.use(session(sessionOption));
+
+// flash 
+app.use(flash());
+
+
+app.use((req,res,next) => {
+    res.locals.success = req.flash("success");
+    next();
+})
 
 // express routers
 const listings = require("./routes/listings.js");
