@@ -12,7 +12,7 @@ const flash = require("connect-flash");
 
 // session 
 const sessionOption = {
-    secret : "Yohohohoho_bybrook",
+    secret : "Yohohohoho_brook",
     resave : false,
     saveUninititalize : true, 
     cookie: {
