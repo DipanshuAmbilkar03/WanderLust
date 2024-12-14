@@ -9,6 +9,9 @@ const ejsMate = require("ejs-mate");
 const expressError = require("./utils/expressError.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport"); 
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 
 // session 
 const sessionOption = {
@@ -30,10 +33,33 @@ app.use(session(sessionOption));
 app.use(flash());
 
 
+// passport initialization and session setup
+app.use(passport.initialize());
+app.use(passport.session());
+
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(User.authenticate()));
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req,res,next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     next();
+})
+
+// demo user
+app.get("/demouser", async (req,res) => {
+    let fakeUser = ({
+        email : "fake@gmail.com",
+        username : "fake",
+    });
+
+    // static method
+    let registeredUser = await User.register(fakeUser,"fakepass");
+    res.send(registeredUser);
 })
 
 // express routers
