@@ -1,0 +1,57 @@
+<% layout("./layouts/boilerplate") %>
+
+<div class="col-8 offset-2">
+    <h1>WanderLust</h1>
+    <h4>Signup</h4>
+</div>
+<div class="row">
+    <div class="col-8 offset-2">
+        <form action="/signup" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input name="username"
+                        type="text" 
+                            class="form-control"
+                                id="username"
+                                    required>
+                <div class="valid-feedback">
+                    Looks Good!.
+                </div>
+                <div class="invalid-feedback">
+                    Please enter the username
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input name="email"
+                        type="text" 
+                            class="form-control"
+                                id="email"
+                                    required>
+                <div class="valid-feedback">
+                    Looks Good!.
+                </div>
+                <div class="invalid-feedback">
+                    Please enter the email
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">password</label>
+                <input name="password"
+                        type="text" 
+                            class="form-control"
+                                id="password"
+                                    required>
+                <div class="valid-feedback">
+                    Looks Good!.
+                </div>
+                <div class="invalid-feedback">
+                    Please enter the password
+                </div>
+            </div>
+            <button class="btn btn-success">SignUp</button>
+        </form>
+    </div>
+</div>
