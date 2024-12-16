@@ -99,8 +99,6 @@ app.use("/listings/:id/reviews" , reviewsRouter);
 // users
 app.use("/" , userRouter);
 
-
-
 app.get("/", (req,res) => {
     res.send("this is root directory.")
     // console.log("this is root route.");
