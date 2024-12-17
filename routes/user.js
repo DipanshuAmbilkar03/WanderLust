@@ -21,4 +21,9 @@ router.post("/signup" , wrapAsync(async(req,res) => {
     }
 }))
 
+// login User
+router.get("/login" , (req,res) => {
+    res.render("./user/login.ejs");
+})
+
 module.exports = router;
