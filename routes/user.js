@@ -23,17 +23,17 @@ router.post("/signup" , wrapAsync(async(req,res) => {
 }))
 
 // login User
-router.get("/login" , (req,res) => {
-    res.render("./user/login.ejs");
-})
+router.get("/login", (req, res) => {
+    res.render("./user/login.ejs", { messages: req.flash() }); // Pass messages to template
+});
 
 router.post("/login",passport.authenticate("local",
-                {failureRedirect : "/login", failureFlash : true})
+                { failureRedirect : "/login", failureFlash : true })
                                                 ,(async(req,res) => {
 
         // let{ user } = req.params;
-        req.flash("success", "you are login");
-        res.redirect("login");
+        req.flash("success", "you are logged in ");
+        res.redirect("listings");
 }))
 
 module.exports = router;
