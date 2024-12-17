@@ -288,7 +288,9 @@ const sampleListings = [
     price: 1800,
     location: "Costa Rica",
     country: "Costa Rica",
-  },
+  },{
+    image : "https://unsplash.com/photos/a-snow-covered-mountain-range-with-trees-in-the-foreground-oeFIfQ-LuJM",
+  }
 ];
 
 module.exports = { data: sampleListings };
