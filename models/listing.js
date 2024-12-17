@@ -13,8 +13,15 @@ const listingItems = new Schema({
             default:
                 "https://unsplash.com/photos/a-snow-covered-mountain-range-with-trees-in-the-foreground-oeFIfQ-LuJM",
             set: (v) => 
-                v === " " ? "https://unsplash.com/photos/a-snow-covered-mountain-range-with-trees-in-the-foreground-oeFIfQ-LuJM" : v,
+                v === " " ? v : "https://unsplash.com/photos/a-snow-covered-mountain-range-with-trees-in-the-foreground-oeFIfQ-LuJM",
         },
+        /*
+        description : String,
+        image: {
+            type: String,
+            default: "https://unsplash.com/photos/a-snow-covered-mountain-range-with-trees-in-the-foreground-oeFIfQ-LuJM",
+            set: (v) => v && v.trim() !== "" ? v : "https://unsplash.com/photos/a-snow-covered-mountain-range-with-trees-in-the-foreground-oeFIfQ-LuJM",
+        },*/ 
         price : { 
             type : Number, 
         },
