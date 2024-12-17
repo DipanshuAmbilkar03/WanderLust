@@ -51,16 +51,16 @@ app.use((req,res,next) => {
 })
 
 // demo user
-app.get("/demouser", async (req,res) => {
-    let fakeUser = ({
-        email : "fake@gmail.com",
-        username : "fake",
-    });
+// app.get("/demouser", async (req,res) => {
+//     let fakeUser = ({
+//         email : "fake@gmail.com",
+//         username : "fake",
+//     });
 
-    // static method
-    let registeredUser = await User.register(fakeUser,"fakepass");
-    res.send(registeredUser);
-})
+//     // static method
+//     let registeredUser = await User.register(fakeUser,"fakepass");
+//     res.send(registeredUser);
+// })
 
 // express routers
 const listingRouter = require("./routes/listings.js");
