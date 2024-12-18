@@ -40,9 +40,13 @@ router.get("/" , wrapAsync(async (req,res) => {
 }))
 
 router.get("/new", (req,res) => {
-    res.render("./listings/new.ejs")
+    console.log(req.user);
+    if(!req.isAuthenticated()) {
+        req.flash("error" , "you are not logged in");
+        return res.redirect("/login");
+    }
+    return res.render("./listings/new.ejs");
 })
-
 
 router.get("/:id",wrapAsync(async (req,res) => {
     let { id } = req.params;
