@@ -1,1 +1,2 @@
 CrazyClient.class
+manual.txt

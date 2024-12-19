@@ -1,0 +1,4 @@
+5.1 - req 
+  # 5.1.1 - req.user
+  # 5.1.2 - req.path,req.orignalUrl
+
