@@ -3,6 +3,7 @@ const router = express.Router({mergeParams:true});
 const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
+const { saveRedirectUrl } = require("../middleware.js");
 
 router.get("/signup" , (req,res) => {
     res.render("./user/signup.ejs");
@@ -34,13 +35,15 @@ router.get("/login", (req, res) => {
     res.render("./user/login.ejs", { messages: req.flash() }); // Pass messages to template
 });
 
-router.post("/login",passport.authenticate("local",
+router.post("/login",
+    saveRedirectUrl,
+        passport.authenticate("local",
                 { failureRedirect : "/login", failureFlash : true })
                                                 ,(async(req,res) => {
 
         // let{ user } = req.params;
         req.flash("success", "you are logged in ");
-        res.redirect("listings");
+        res.redirect(res.locals.redirectUrl);
 }))
 
 router.get("/logout" , (req,res,next) => {
