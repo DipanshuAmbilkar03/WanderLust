@@ -43,7 +43,8 @@ router.post("/login",
 
         // let{ user } = req.params;
         req.flash("success", "you are logged in ");
-        res.redirect(res.locals.redirectUrl);
+        let checkRedirectUrl = res.locals.redirectUrl || "/listings";
+        res.redirect(checkRedirectUrl);
 }))
 
 router.get("/logout" , (req,res,next) => {
