@@ -13,18 +13,18 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
-// session 
-const sessionOption = {
-    secret : "Yohohohoho_brook",
-    resave : false,
-    saveUninititalize : true, 
-    cookie: {
-        expires : Date.now() + 7 * 24 * 60 * 60 * 1000,
-        maxAge : 7 * 24 * 60 * 60 * 1000,
-        // for cross scripting attack
-        httpOnly : true,
-    },
-};
+    // session 
+    const sessionOption = {
+        secret : "Yohohohoho_brook",
+        resave : false,
+        saveUninitialized : true, 
+        cookie: {
+            expires : Date.now() + 7 * 24 * 60 * 60 * 1000,
+            maxAge : 7 * 24 * 60 * 60 * 1000,
+            // for cross scripting attack
+            httpOnly : true,
+        },
+    };
 
 // session middleware
 app.use(session(sessionOption));
