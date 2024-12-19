@@ -4,7 +4,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const { listingSchema } = require("../schema.js");
 const Listing = require("../models/listing.js"); 
 const expressError = require("../utils/expressError.js");
-
+const { isLoggedIn } = require("../middleware.js");
 
 // validation lisitings
 const validateFunc = (req, res, next) => {
@@ -39,7 +39,7 @@ router.get("/" , wrapAsync(async (req,res) => {
     // })
 }))
 
-router.get("/new", (req,res) => {
+router.get("/new", isLoggedIn,(req,res) => {
     res.render("./listings/new.ejs")
 })
 
@@ -71,6 +71,7 @@ router.get("/:id",wrapAsync(async (req,res) => {
 
 // server side error handling 
 router.post("/", 
+    isLoggedIn,
     validateFunc,
     wrapAsync(async(req,res,next) => {
     // if(!req.body.listing) {
@@ -104,7 +105,7 @@ router.post("/",
     res.redirect("/listings");
 }))
 
-router.get("/:id/edit" , wrapAsync(async (req,res) => {
+router.get("/:id/edit" ,isLoggedIn, wrapAsync(async (req,res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
     
@@ -116,7 +117,7 @@ router.get("/:id/edit" , wrapAsync(async (req,res) => {
     res.render("./listings/edit.ejs" , { listing })
 }))
 
-router.get("/:id/delete" , wrapAsync(async (req,res) => {
+router.get("/:id/delete" , isLoggedIn,wrapAsync(async (req,res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
     console.log(deletedListing);
@@ -137,8 +138,9 @@ router.get("/:id/delete" , wrapAsync(async (req,res) => {
 //  <------------------------------------------------------------------>
 
 router.put(
-    "/:id" 
-    ,wrapAsync(async (req,res) => {
+    "/:id" ,
+        isLoggedIn,
+            wrapAsync(async (req,res) => {
         // if(!req.body.listing) {
         //     throw new expressError(400, "send a valid listing data");
         // }
